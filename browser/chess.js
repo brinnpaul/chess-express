@@ -38,6 +38,8 @@ var chessBoard = {
   selection: null,
   offset: new THREE.Vector3(),
   objects: [],
+  white: {},
+  black: {},
   centers: [],
   raycaster: new THREE.Raycaster(),
 
@@ -133,43 +135,44 @@ var chessBoard = {
     this.scene.add(this.plane)
 
   },
+
   loadPieces: function() {
     //load white
-    renderPiece(pieces.rook, [0, 0, -305], 0xCDCDC1)
-    renderPiece(pieces.bishop, [0, 0, -305], 0xCDCDC1)
-    renderPiece(pieces.knight, [107, 0, -201], 0xCDCDC1, true)
-    renderPiece(pieces.king, [0, 0, -305], 0xCDCDC1)
-    renderPiece(pieces.queen, [0, 0, -305], 0xCDCDC1)
-    renderPiece(pieces.knight, [292, 0, -201], 0xCDCDC1, true)
-    renderPiece(pieces.bishop, [-110, 0, -305], 0xCDCDC1)
-    renderPiece(pieces.rook, [-260, 0, -305], 0xCDCDC1)
+    renderPiece(pieces.rook, [0, 0, -305], 0xCDCDC1, 'rook1')
+    renderPiece(pieces.bishop, [0, 0, -305], 0xCDCDC1, 'bishop1')
+    renderPiece(pieces.knight, [107, 0, -201], 0xCDCDC1, 'knight1', rotate=true)
+    renderPiece(pieces.king, [0, 0, -305], 0xCDCDC1, 'king')
+    renderPiece(pieces.queen, [0, 0, -305], 0xCDCDC1, 'queen')
+    renderPiece(pieces.knight, [292, 0, -201], 0xCDCDC1, 'knight2', rotate=true)
+    renderPiece(pieces.bishop, [-110, 0, -305], 0xCDCDC1, 'bishop2')
+    renderPiece(pieces.rook, [-260, 0, -305], 0xCDCDC1, 'rook2')
 
-    renderPiece(pieces.pawn, [73, 0, -225], 0xCDCDC1)
-    renderPiece(pieces.pawn, [34, 0, -225], 0xCDCDC1)
-    renderPiece(pieces.pawn, [-3, 0, -225], 0xCDCDC1)
-    renderPiece(pieces.pawn, [-39, 0, -225], 0xCDCDC1)
-    renderPiece(pieces.pawn, [-77, 0, -225], 0xCDCDC1)
-    renderPiece(pieces.pawn, [-115, 0, -225], 0xCDCDC1)
-    renderPiece(pieces.pawn, [-152, 0, -225], 0xCDCDC1)
-    renderPiece(pieces.pawn, [-188, 0, -225], 0xCDCDC1)
+    renderPiece(pieces.pawn, [73, 0, -225], 0xCDCDC1, 'pawn1')
+    renderPiece(pieces.pawn, [34, 0, -225], 0xCDCDC1, 'pawn2')
+    renderPiece(pieces.pawn, [-3, 0, -225], 0xCDCDC1, 'pawn3')
+    renderPiece(pieces.pawn, [-39, 0, -225], 0xCDCDC1, 'pawn4')
+    renderPiece(pieces.pawn, [-77, 0, -225], 0xCDCDC1, 'pawn5')
+    renderPiece(pieces.pawn, [-115, 0, -225], 0xCDCDC1, 'pawn6')
+    renderPiece(pieces.pawn, [-152, 0, -225], 0xCDCDC1, 'pawn7')
+    renderPiece(pieces.pawn, [-188, 0, -225], 0xCDCDC1, 'pawn8')
     // load black
-    renderPiece(pieces.rook, [0, 0, -35], 0x36454f)
-    renderPiece(pieces.bishop, [0, 0, -35], 0x36454f)
-    renderPiece(pieces.knight, [0, 0, -35], 0x36454f)
-    renderPiece(pieces.king, [0, 0, -35], 0x36454f)
-    renderPiece(pieces.queen, [0, 0, -35], 0x36454f)
-    renderPiece(pieces.knight, [185, 0, -35], 0x36454f)
-    renderPiece(pieces.bishop, [-110, 0, -35], 0x36454f)
-    renderPiece(pieces.rook, [-260, 0, -35], 0x36454f)
+    renderPiece(pieces.rook, [0, 0, -35], 0x36454f, 'rook1')
+    renderPiece(pieces.bishop, [0, 0, -35], 0x36454f, 'bishop1')
+    renderPiece(pieces.knight, [0, 0, -35], 0x36454f, 'knight1')
+    renderPiece(pieces.king, [0, 0, -35], 0x36454f, 'king')
+    renderPiece(pieces.queen, [0, 0, -35], 0x36454f, 'queen')
+    renderPiece(pieces.knight, [185, 0, -35], 0x36454f, 'knight2')
+    renderPiece(pieces.bishop, [-110, 0, -35], 0x36454f, 'bishop2')
+    renderPiece(pieces.rook, [-260, 0, -35], 0x36454f, 'rook2')
 
-    renderPiece(pieces.pawn, [73, 0, -35], 0x36454f)
-    renderPiece(pieces.pawn, [34, 0, -35], 0x36454f)
-    renderPiece(pieces.pawn, [-3, 0, -35], 0x36454f)
-    renderPiece(pieces.pawn, [-39, 0, -35], 0x36454f)
-    renderPiece(pieces.pawn, [-77, 0, -35], 0x36454f)
-    renderPiece(pieces.pawn, [-115, 0, -35], 0x36454f)
-    renderPiece(pieces.pawn, [-152, 0, -35], 0x36454f)
-    renderPiece(pieces.pawn, [-188, 0, -35], 0x36454f)
+    renderPiece(pieces.pawn, [73, 0, -35], 0x36454f, 'pawn1')
+    renderPiece(pieces.pawn, [34, 0, -35], 0x36454f, 'pawn2')
+    renderPiece(pieces.pawn, [-3, 0, -35], 0x36454f, 'pawn3')
+    renderPiece(pieces.pawn, [-39, 0, -35], 0x36454f, 'pawn4')
+    renderPiece(pieces.pawn, [-77, 0, -35], 0x36454f, 'pawn5')
+    renderPiece(pieces.pawn, [-115, 0, -35], 0x36454f, 'pawn6')
+    renderPiece(pieces.pawn, [-152, 0, -35], 0x36454f, 'pawn7')
+    renderPiece(pieces.pawn, [-188, 0, -35], 0x36454f, 'pawn8')
 
   },
   createBoard: function() {
@@ -180,13 +183,19 @@ var chessBoard = {
         if ((i+j)%2 === 0) color = white
         else color = black
         if (color===black) {
-          var square = new THREE.Mesh( new THREE.PlaneGeometry(38, 38, 10, 10), new THREE.MeshPhongMaterial({color:color, transparent:true, opacity:0.3}) )
+          var square = new THREE.Mesh(
+            new THREE.PlaneGeometry(38, 38, 10, 10),
+            new THREE.MeshPhongMaterial({color:color, transparent:true, opacity:0.3})
+          )
         } else {
-          var square = new THREE.Mesh( new THREE.PlaneGeometry(38, 38, 10, 10), new THREE.MeshPhongMaterial({color:color}) )
+          var square = new THREE.Mesh(
+            new THREE.PlaneGeometry(38, 38, 10, 10),
+            new THREE.MeshPhongMaterial({color:color})
+          )
         }
         square.receiveShadow = true
-        square.position.set(38*i+16, 7, 38*j-250)
-        chessBoard.centers.push([38*i+16, 38*j-250])
+        square.position.set(38*i+16-155, 7, 38*j-250)
+        chessBoard.centers.push([38*i+16-155, 38*j-250])
         square.rotation.x = -Math.PI / 2
         chessBoard.scene.add(square)
       }
@@ -202,7 +211,10 @@ var chessBoard = {
     vector.unproject(chessBoard.camera)
 
     // Set the raycaster position
-    chessBoard.raycaster.set( chessBoard.camera.position, vector.sub( chessBoard.camera.position ).normalize() )
+    chessBoard.raycaster.set(
+      chessBoard.camera.position,
+      vector.sub( chessBoard.camera.position
+      ).normalize() )
     // Find all intersected objects
     var intersects = chessBoard.raycaster.intersectObjects(chessBoard.objects)
     // console.log("INTERSECTS", intersects)
@@ -218,6 +230,7 @@ var chessBoard = {
   },
   onDocumentMouseMove: function (event) {
     event.preventDefault()
+    console.log("hello")
     // Get mouse position
     var mouseX = (event.clientX / window.innerWidth) * 2 - 1
     var mouseY = -(event.clientY / window.innerHeight) * 2 + 1
@@ -225,10 +238,14 @@ var chessBoard = {
     var vector = new THREE.Vector3(mouseX, mouseY, 1)
     vector.unproject(chessBoard.camera)
     // Set the raycaster position
-    chessBoard.raycaster.set( chessBoard.camera.position, vector.sub( chessBoard.camera.position ).normalize() )
+    chessBoard.raycaster.set(
+      chessBoard.camera.position,
+      vector.sub( chessBoard.camera.position
+      ).normalize() )
     if (chessBoard.selection) {
       // Check the position where the plane is intersected
       var intersects = chessBoard.raycaster.intersectObject(chessBoard.plane)
+      console.log(intersects)
       // Reposition the object based on the intersection point with the plane
       var newPoint = intersects[0]
       // socket.emit('moving', newPoint)
@@ -273,7 +290,9 @@ function update() {
 }
 
 function render() {
-  if (chessBoard.renderer) chessBoard.renderer.render(chessBoard.scene, chessBoard.camera)
+  if (chessBoard.renderer) {
+    chessBoard.renderer.render(chessBoard.scene, chessBoard.camera)
+  }
 }
 
 function initialize() {
@@ -281,14 +300,17 @@ function initialize() {
   animate()
 }
 
-function renderPiece(piece, coor, color, rotate) {
+function renderPiece(piece, coor, color, name, rotate=false) {
   var oStlLoader = new THREE.STLLoader()
   oStlLoader.load(piece, function(geometry) {
     var material = new THREE.MeshPhongMaterial({color:color, shininess:3})
     var mesh = new THREE.Mesh(geometry, material)
-    // mesh.castShadow = mesh.receiveShadow = true
-
     chessBoard.objects.push(mesh)
+    if (color == 0xCDCDC1) {
+      chessBoard.white[name] = mesh
+    } else {
+      chessBoard.black[name] = mesh
+    }
     if (rotate) mesh.rotation.y = Math.PI
     mesh.position.x = coor[0]
     mesh.position.y = coor[1]
